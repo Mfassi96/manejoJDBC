@@ -120,18 +120,33 @@ public class PersonaDAO {
 
     }
     
-//////////////////////////////////////////////////////////////////
-//    public int eliminarPersona(int idPersona) {
-//        Connection conn = null;
-//        try {
-//            PreparedStatement stmt = conn.prepareStatement(SQL_DELETE);
-//             stmt.setInt(1,idPersona);
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//           
-//        }
-//        return idPersona;
-//    }
-    /////////////////////////////////////////////////////////////////////
+
+        public int eliminar (Persona persona) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int registros = 0;
+
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE);
+
+            //pasar valores a la consukta
+            stmt.setInt(1, persona.getIdPersona());
+            registros = stmt.executeUpdate(); //este metodo puede ejecutar sentencias tipo insert, update o delete
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            try {
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+
+        }
+        return registros;
+
+    }
+  
 
 }

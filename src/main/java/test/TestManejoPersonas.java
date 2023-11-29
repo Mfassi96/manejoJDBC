@@ -15,8 +15,13 @@ public class TestManejoPersonas {
 //        personaDao.insertar(personaNueva);
         
            //modificar un objeto persona
-           Persona personaModificar=new Persona(6, "Modificado", "Modificado", "mail@mail.com", "1234");
-           personaDao.actualizar(personaModificar);
+           
+//           Persona personaModificar=new Persona(6, "Modificado", "Modificado", "mail@mail.com", "1234");
+//           personaDao.actualizar(personaModificar);
+
+            //eliminar persona
+            Persona personaEliminar=new Persona(6);
+            personaDao.eliminar(personaEliminar);
            
         List <Persona> personas=personaDao.seleccionar();
         

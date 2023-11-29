@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class PersonaDAO {
 
     private static String SQL_SELECT = "SELECT * FROM persona";
-    private static String SQL_INSRT = "INSERT INTO persona(id_persona,nombre, apellido, email, telefono) VALUES (NULL,?,?,?,?)";
+    private static String SQL_INSERT = "INSERT INTO persona(nombre, apellido, email, telefono) VALUES (?,?,?,?)";
     
     public List<Persona> seleccionar() {
         Connection conn = null;
@@ -62,13 +62,13 @@ public class PersonaDAO {
         
         try {
             conn=getConnection();
-            stmt=conn.prepareStatement("SQL_INSERT");
+            stmt=conn.prepareStatement(SQL_INSERT);
             
             //pasar valores a la consukta
-            stmt.setString(2, persona.getNombre());
-            stmt.setString(3, persona.getApellido());
-            stmt.setString(4, persona.getEmail());
-            stmt.setString(5, persona.getTelefono());
+            stmt.setString(1, persona.getNombre());
+            stmt.setString(2, persona.getApellido());
+            stmt.setString(3, persona.getEmail());
+            stmt.setString(4, persona.getTelefono());
             registros=stmt.executeUpdate(); //este metodo puede ejecutar sentencias tipo insert, update o delete
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
